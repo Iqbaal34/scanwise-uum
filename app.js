@@ -1,5 +1,5 @@
 /* ============================================================
-   QRPay Lab — app.js (Full Integrated Code)
+   ScanWise UUM — app.js (Full Integrated Code)
    Includes:
      1) Feature 1: QR Payment Simulator (Integer sen math, strict validation, state machine)
      2) Upgraded "How Online Transactions Work" Explainer (6 plain-language stages,
@@ -11,7 +11,7 @@
 
 // ---------- Configuration (integer sen, never floats) ----------
 const CONFIG = {
-    MERCHANT: 'Kopi Corner Café',
+    MERCHANT: 'Kopi Corner Café · UUM',
     PRICE_SEN: 1150,          // RM 11.50 (Purchase receipt amount)
     QR_AMOUNT_SEN: 11500,     // RM 115.00 (Incorrect QR-displayed amount)
     BALANCE_SEN: 10000,       // RM 100.00 (Initial simulated wallet balance)
@@ -576,7 +576,7 @@ function confirmPayment() {
     state._outcome = outcome;
 
     document.getElementById('processing-context').textContent =
-        'SIMULATED TXN · KOPI CORNER CAFÉ · ' + formatSenNorm(outcome.paid);
+        'SIMULATED TXN · KOPI CORNER CAFÉ · UUM · ' + formatSenNorm(outcome.paid);
 
     showStage('processing');
     announce('Processing simulated payment of ' + formatSenNorm(outcome.paid) + '.');
