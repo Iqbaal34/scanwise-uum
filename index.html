@@ -1,0 +1,2285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>QRPay Lab — Learn Safe Digital Payments & Scam Prevention</title>
+    <meta
+      name="description"
+      content="An editorial interactive café challenge, transaction lifecycle explainer, and full-screen SMS scam awareness experience that teaches safe digital payments — no real money moves."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=31" />
+  </head>
+  <body>
+    <!-- ============ SITE WRAPPER (Recedes during Full-Screen Immersive Mode) ============ -->
+    <div id="site-shell" class="site-shell">
+      <!-- ============ NAVBAR (fixed top, solid surface, mobile-scrollable links) ============ -->
+      <header class="nav" id="site-nav">
+        <div class="nav-inner">
+          <a class="brand" href="#landing" data-target="landing">
+            <span class="brand-dot" aria-hidden="true"></span> QRPay&nbsp;Lab
+          </a>
+          <nav class="nav-links" aria-label="Main Navigation">
+            <button type="button" class="nav-link active" data-target="landing">
+              Home
+            </button>
+            <button
+              type="button"
+              class="nav-link"
+              id="nav-explainer-btn"
+              onclick="openExplainerDirect()"
+            >
+              How It Works
+            </button>
+            <button type="button" class="nav-link" data-target="scam-sim">
+              Prevent Scams
+            </button>
+            <button type="button" class="nav-link" data-target="safety">
+              Safety
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <!-- ============ SECTION 1: LANDING ============ -->
+      <section id="landing" class="section section-landing active">
+        <div class="hero container">
+          <div class="hero-copy">
+            <p class="eyebrow reveal mono">
+              TXN-SIM-004 · EDUCATIONAL BUILD — ALL TRANSACTIONS FICTIONAL
+            </p>
+            <h1 class="hero-title display reveal">
+              <span class="line">One scan.</span>
+              <span class="line">One <span class="accent">decisive</span></span>
+              <span class="line">moment.</span>
+            </h1>
+            <p class="hero-sub reveal">
+              Rushed QR payments cost older adults real money. QRPay Lab turns
+              that moment into a sixty-second café challenge — so the first real
+              scan isn't your first attempt.
+            </p>
+            <div class="hero-actions reveal">
+              <button
+                type="button"
+                class="btn btn-primary magnetic"
+                id="pay-hero-cta"
+                onclick="launchImmersivePayExperience()"
+              >
+                Simulate digital payment <span class="btn-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-ghost magnetic"
+                onclick="openExplainerDirect()"
+              >
+                How transactions work
+              </button>
+              <button
+                type="button"
+                class="btn btn-ghost magnetic"
+                data-target="scam-sim"
+              >
+                How to Prevent Any Scams
+              </button>
+            </div>
+            <ul class="hero-stats mono reveal" aria-label="Lesson structure">
+              <li><strong>03</strong><span>stages to play</span></li>
+              <li><strong>06</strong><span>flow steps explained</span></li>
+              <li><strong>RM 0.00</strong><span>actually charged</span></li>
+            </ul>
+          </div>
+
+          <div class="hero-visual reveal" aria-hidden="true">
+            <div class="float-chip chip-balance mono">
+              <span>BALANCE</span><strong>RM 100.00</strong>
+            </div>
+            <div class="float-chip chip-merchant mono">
+              <span>MERCHANT</span><strong>Kopi Corner Café</strong>
+            </div>
+            <div class="float-chip chip-amount mono">
+              <span>ON RECEIPT</span><strong class="blue-text">RM 11.50</strong>
+            </div>
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="qr-area">
+                  <div class="qr-mock"></div>
+                  <div class="qr-scanline"></div>
+                </div>
+                <div class="phone-row mono">
+                  <span>MERCHANT</span><strong>Kopi Corner Café</strong>
+                </div>
+                <div class="phone-row mono">
+                  <span>WALLET</span><strong>RM 100.00</strong>
+                </div>
+                <div class="phone-btn">Confirm</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="hero-caption mono container reveal">
+          SCAN → COMPARE → DECIDE — THE THREE MOVES THIS LAB TRAINS
+        </p>
+      </section>
+
+      <!-- ============ SECTION 2: FEATURE 1 — QR PAYMENT SIMULATOR + UPGRADED EXPLAINER ============ -->
+      <section id="simulator" class="section">
+        <!-- STAGE 1: INTRO / READY (café) -->
+        <div id="stage-intro" class="stage active">
+          <div class="stage-head container">
+            <p class="eyebrow mono">STAGE 01 / 03 — READY · SIMULATED WALLET</p>
+            <h2 class="stage-title display">You're at the counter.</h2>
+          </div>
+          <div class="cafe-scene container">
+            <div class="cafe-board">
+              <div class="coffee-icon" aria-hidden="true">☕</div>
+              <div class="cafe-name display">Kopi Corner Café</div>
+              <div
+                class="panel receipt-card"
+                role="group"
+                aria-label="Order receipt"
+              >
+                <div class="panel-label mono">
+                  ORDER RECEIPT (PURCHASE AMOUNT)
+                </div>
+                <div class="receipt-item">
+                  <span>Coffee</span><span>× 1</span>
+                </div>
+                <div class="receipt-total">
+                  <span>Total to pay</span
+                  ><span class="mono blue-text">RM 11.50</span>
+                </div>
+              </div>
+              <p class="mission-text">
+                Check the payment amount displayed by the QR scan before
+                confirming.
+              </p>
+              <div class="wallet-display panel">
+                <span>Simulated wallet balance</span
+                ><strong class="mono">RM 100.00</strong>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary magnetic"
+                id="scan-trigger-btn"
+                onclick="startScan()"
+              >
+                Scan QR code <span class="btn-arrow">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STAGE 2: SCANNING -->
+        <div id="stage-scanning" class="stage">
+          <div class="stage-head container">
+            <p class="eyebrow mono">STAGE 02 / 03 — SCANNING</p>
+            <h2 class="stage-title display">Point. Scan. Check.</h2>
+          </div>
+          <div class="scanner-overlay container">
+            <div
+              class="scanner-frame"
+              role="img"
+              aria-label="QR code being scanned"
+            >
+              <div class="qr-mock"></div>
+              <div class="qr-scanline" id="active-scanline"></div>
+              <div class="qr-corner tl"></div>
+              <div class="qr-corner tr"></div>
+              <div class="qr-corner bl"></div>
+              <div class="qr-corner br"></div>
+            </div>
+            <p class="scan-text mono" role="status" id="scan-status">
+              SCANNING QR…
+            </p>
+          </div>
+        </div>
+
+        <!-- STAGE 3: AMOUNT_REVIEW -->
+        <div id="stage-review" class="stage">
+          <div class="stage-head container">
+            <p class="eyebrow mono">STAGE 03 / 03 — VERIFY AMOUNT</p>
+            <h2 class="stage-title display">Compare before you confirm.</h2>
+          </div>
+          <div class="payment-screen container">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-content">
+                <div class="payment-header">
+                  <button
+                    type="button"
+                    class="back-btn"
+                    onclick="backToCafe()"
+                    aria-label="Back to café"
+                  >
+                    ←
+                  </button>
+                  <div class="header-title">Confirm payment · Simulation</div>
+                </div>
+                <div class="merchant-info">
+                  <div class="merchant-icon" aria-hidden="true">🏪</div>
+                  <div class="merchant-name">Kopi Corner Café</div>
+                  <div class="merchant-sub mono">
+                    QR DISPLAYED RM 115.00 · RECEIPT IS RM 11.50
+                  </div>
+                </div>
+
+                <div class="amount-display" id="amount-wrap">
+                  <div class="panel-label mono" id="amount-label">
+                    QR-DISPLAYED PAYMENT AMOUNT
+                  </div>
+                  <div class="amount-value mono" id="payment-amount">
+                    RM 115.00
+                  </div>
+                  <div class="amount-flag mono" id="amount-flag" role="status">
+                    SCREEN SAYS RM 115.00 — RECEIPT SAYS RM 11.50
+                  </div>
+
+                  <!-- Inline Synchronized Editable Amount Control -->
+                  <div class="inline-edit-box">
+                    <label
+                      for="inline-amount-input"
+                      class="inline-edit-label mono"
+                      >VERIFY OR EDIT PAYMENT AMOUNT (RM)</label
+                    >
+                    <div class="inline-input-row">
+                      <span class="inline-currency mono" aria-hidden="true"
+                        >RM</span
+                      >
+                      <input
+                        type="text"
+                        id="inline-amount-input"
+                        value="115.00"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        spellcheck="false"
+                        class="inline-amount-input mono"
+                        aria-describedby="inline-amount-error amount-flag"
+                      />
+                      <button
+                        type="button"
+                        class="btn-match-receipt mono"
+                        onclick="applyReceiptAmount()"
+                        title="Set to RM 11.50"
+                      >
+                        Use RM 11.50
+                      </button>
+                    </div>
+                    <div
+                      class="field-error mono"
+                      id="inline-amount-error"
+                      role="alert"
+                      hidden
+                    ></div>
+                  </div>
+                </div>
+
+                <div class="balance-info panel">
+                  <span>Simulated wallet balance</span>
+                  <strong class="mono" id="current-balance">RM 100.00</strong>
+                </div>
+                <div class="payment-actions">
+                  <button
+                    type="button"
+                    class="btn btn-ghost"
+                    onclick="editAmount()"
+                  >
+                    Full edit screen
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="proceedToConfirmation()"
+                  >
+                    Proceed <span class="btn-arrow">→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <aside
+              class="receipt-reminder panel"
+              role="group"
+              aria-label="Your order receipt comparison"
+            >
+              <div class="panel-label mono">YOUR ORDER RECEIPT</div>
+              <div class="reminder-amount mono">RM 11.50</div>
+              <div class="reminder-note">Coffee × 1 · Kopi Corner Café</div>
+              <div class="reminder-meta mono">
+                <div class="reminder-meta-row">
+                  <span>QR Displayed:</span><strong>RM 115.00</strong>
+                </div>
+                <div class="reminder-meta-row">
+                  <span>Current Input:</span
+                  ><strong id="sidebar-current-amount">RM 115.00</strong>
+                </div>
+              </div>
+              <div class="reminder-hit mono" id="review-mismatch">
+                DIFFERENCE: RM 103.50
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- DEDICATED EDITING SCREEN -->
+        <div id="stage-editing" class="stage">
+          <div class="stage-head container">
+            <p class="eyebrow mono">ADJUST PAYMENT AMOUNT</p>
+            <h2 class="stage-title display">Correct the amount.</h2>
+          </div>
+          <div class="edit-screen container">
+            <div class="edit-card panel">
+              <div class="panel-label mono">ENTER THE CORRECT AMOUNT</div>
+              <label
+                for="amount-input"
+                class="edit-header display"
+                style="display: block"
+                >Edit payment amount</label
+              >
+              <div class="edit-input-group">
+                <span class="currency mono">RM</span>
+                <input
+                  type="text"
+                  id="amount-input"
+                  value="115.00"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  spellcheck="false"
+                  class="amount-input mono"
+                  aria-describedby="amount-error"
+                  aria-label="Payment amount in ringgit"
+                />
+              </div>
+              <div
+                class="field-error mono"
+                id="amount-error"
+                role="alert"
+                hidden
+              ></div>
+              <div class="edit-hint">
+                Purchase receipt total: <strong>RM 11.50</strong> · QR
+                originally showed: <strong>RM 115.00</strong>
+              </div>
+              <div class="edit-actions">
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  onclick="cancelEdit()"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="saveAmount()"
+                >
+                  Save &amp; continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STAGE 4: CONFIRMATION -->
+        <div id="stage-confirmation" class="stage">
+          <div class="stage-head container">
+            <p class="eyebrow mono">
+              FINAL VERIFICATION — SIMULATED TRANSACTION
+            </p>
+            <h2 class="stage-title display">Confirm your payment.</h2>
+          </div>
+          <div class="confirm-screen container">
+            <div class="confirm-card panel">
+              <div class="panel-label mono">FINAL CHECK · KOPI CORNER CAFÉ</div>
+              <div class="confirm-title display">You are about to pay</div>
+              <div class="confirm-amount mono" id="confirm-amount">
+                RM 115.00
+              </div>
+              <div class="confirm-note mono" id="confirm-note">
+                Receipt says RM 11.50 · Difference RM 103.50
+              </div>
+              <div class="confirm-actions">
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  onclick="backToReview()"
+                >
+                  ← Return to review
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="pay-btn"
+                  onclick="confirmPayment()"
+                >
+                  Confirm &amp; pay
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STAGE 5: PROCESSING -->
+        <div id="stage-processing" class="stage">
+          <div
+            class="processing-screen container"
+            role="status"
+            aria-live="polite"
+          >
+            <div class="spinner" aria-hidden="true"></div>
+            <div class="processing-text mono">
+              PROCESSING SIMULATED PAYMENT…
+            </div>
+            <div class="processing-context mono" id="processing-context">
+              TXN · KOPI CORNER CAFÉ · RM 11.50
+            </div>
+          </div>
+        </div>
+
+        <!-- STAGE 6: RESULT -->
+        <div id="stage-result" class="stage">
+          <div class="stage-head container">
+            <p class="eyebrow mono">SIMULATION OUTCOME · NO REAL MONEY MOVED</p>
+            <h2 class="stage-title display" id="result-stage-heading">
+              Transaction Summary
+            </h2>
+          </div>
+          <div class="result-screen container">
+            <div class="result-card panel">
+              <div
+                class="result-icon mono"
+                id="result-icon"
+                role="img"
+                aria-label="Verified"
+              >
+                ✓
+              </div>
+              <div class="result-title display" id="result-title">
+                Payment successful
+              </div>
+              <div class="transaction-details panel">
+                <div class="detail-row">
+                  <span>Merchant</span><strong>Kopi Corner Café</strong>
+                </div>
+                <div class="detail-row">
+                  <span>Receipt purchase price</span
+                  ><strong class="mono">RM 11.50</strong>
+                </div>
+                <div class="detail-row">
+                  <span>Confirmed amount paid</span
+                  ><strong class="mono" id="paid-amount">RM 11.50</strong>
+                </div>
+                <div class="detail-row">
+                  <span>Initial simulated balance</span
+                  ><strong class="mono">RM 100.00</strong>
+                </div>
+                <div class="detail-row highlight">
+                  <span>Remaining simulated balance</span
+                  ><strong class="mono" id="new-balance">RM 88.50</strong>
+                </div>
+                <div class="detail-row warning" id="overpayment-row" hidden>
+                  <span>Discrepancy vs. receipt</span
+                  ><strong class="mono" id="overpayment-amount">RM 0.00</strong>
+                </div>
+              </div>
+              <div
+                class="result-message"
+                id="result-message"
+                role="status"
+              ></div>
+              <div class="result-actions">
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  onclick="showExplainer()"
+                >
+                  See how payments work
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="tryAgain()"
+                >
+                  Replay simulation ↻
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+                 UPGRADED STAGE: HOW ONLINE TRANSACTIONS WORK (#stage-explainer)
+                 Modern, clean motion-graphics journey through 6 simple steps
+                 with a live scene visual, SVG packet path, and 3 outcomes.
+                 ============================================================ -->
+        <div id="stage-explainer" class="stage">
+          <div class="explainer-screen container">
+            <!-- Clean Introductory Header -->
+            <div class="tx-hero-header">
+              <p class="eyebrow mono">
+                HOW ONLINE TRANSACTIONS WORK · EDUCATIONAL OVERVIEW
+              </p>
+              <h2 class="explainer-title display">
+                What actually happens when you pay online?
+              </h2>
+              <p class="explainer-subtitle">
+                Follow a RM 11.50 purchase step by step as your payment request
+                travels from your device, gets checked by your payment provider,
+                and returns a result to the shop.
+              </p>
+              <div class="tx-hero-actions">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="tx-explore-btn"
+                  onclick="startTxWalkthrough()"
+                >
+                  Start step-by-step tour <span class="btn-arrow">→</span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  id="tx-autoplay-btn"
+                  onclick="toggleTxAutoplay()"
+                  aria-pressed="false"
+                >
+                  ▶ Auto-play journey
+                </button>
+              </div>
+            </div>
+
+            <!-- Main Interactive Motion-Graphics Stage -->
+            <div class="tx-system-stage panel" id="tx-system-stage">
+              <!-- Top Bar: Step Indicator + Outcome Mode Selector -->
+              <div class="tx-stage-Banner">
+                <div class="tx-live-operation">
+                  <span
+                    class="tx-status-dot"
+                    id="tx-status-dot"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="mono tx-op-label" id="tx-op-label"
+                    >STEP 1 OF 6 · YOU START A PURCHASE</span
+                  >
+                </div>
+
+                <div
+                  class="tx-outcome-selector"
+                  role="group"
+                  aria-label="Simulate transaction outcome"
+                >
+                  <span class="tx-outcome-label mono">OUTCOME:</span>
+                  <div class="tx-outcome-pills">
+                    <button
+                      type="button"
+                      class="tx-outcome-btn active"
+                      data-outcome="successful"
+                      onclick="setTxOutcome('successful')"
+                    >
+                      <span class="tx-outcome-icon" aria-hidden="true">✓</span>
+                      Successful
+                    </button>
+                    <button
+                      type="button"
+                      class="tx-outcome-btn"
+                      data-outcome="declined"
+                      onclick="setTxOutcome('declined')"
+                    >
+                      <span class="tx-outcome-icon" aria-hidden="true">✕</span>
+                      Declined
+                    </button>
+                    <button
+                      type="button"
+                      class="tx-outcome-btn"
+                      data-outcome="pending"
+                      onclick="setTxOutcome('pending')"
+                    >
+                      <span class="tx-outcome-icon" aria-hidden="true">◷</span>
+                      Pending
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6-Segment Visual Progress Bar (Direct Step Selection) -->
+              <div
+                class="tx-progress-rail"
+                role="tablist"
+                aria-label="Transaction journey steps"
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  class="tx-step-pill active"
+                  data-step="0"
+                  onclick="selectTxStage(0)"
+                  aria-selected="true"
+                >
+                  <span class="tx-pill-num mono">01</span>
+                  <span class="tx-pill-name">Start purchase</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  class="tx-step-pill"
+                  data-step="1"
+                  onclick="selectTxStage(1)"
+                  aria-selected="false"
+                >
+                  <span class="tx-pill-num mono">02</span>
+                  <span class="tx-pill-name">Choose method</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  class="tx-step-pill"
+                  data-step="2"
+                  onclick="selectTxStage(2)"
+                  aria-selected="false"
+                >
+                  <span class="tx-pill-num mono">03</span>
+                  <span class="tx-pill-name">Processed</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  class="tx-step-pill"
+                  data-step="3"
+                  onclick="selectTxStage(3)"
+                  aria-selected="false"
+                >
+                  <span class="tx-pill-num mono">04</span>
+                  <span class="tx-pill-name">Bank checks</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  class="tx-step-pill"
+                  data-step="4"
+                  onclick="selectTxStage(4)"
+                  aria-selected="false"
+                >
+                  <span class="tx-pill-num mono">05</span>
+                  <span class="tx-pill-name">Result returns</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  class="tx-step-pill"
+                  data-step="5"
+                  onclick="selectTxStage(5)"
+                  aria-selected="false"
+                >
+                  <span class="tx-pill-num mono">06</span>
+                  <span class="tx-pill-name">Merchant updated</span>
+                </button>
+              </div>
+
+              <!-- Central Motion Visualization: SVG Data Tracks + 4 Clean Participant Nodes -->
+              <div class="tx-diagram-viewport" id="tx-diagram-viewport">
+                <svg
+                  class="tx-svg-canvas"
+                  id="tx-svg-canvas"
+                  viewBox="0 0 1000 185"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <filter
+                      id="txPacketGlow"
+                      x="-40%"
+                      y="-40%"
+                      width="180%"
+                      height="180%"
+                    >
+                      <feGaussianBlur stdDeviation="4" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <!-- Forward Request Path (Nodes 1 → 2 → 3 → 4) -->
+                  <path
+                    id="tx-track-request"
+                    class="tx-svg-track"
+                    d="M 125 72 L 875 72"
+                  />
+                  <path
+                    id="tx-progress-request"
+                    class="tx-svg-progress"
+                    d="M 125 72 L 875 72"
+                  />
+
+                  <!-- Return Response Arc (Node 4 → Node 3 → Node 2) -->
+                  <path
+                    id="tx-track-response"
+                    class="tx-svg-track tx-track-dashed"
+                    d="M 875 98 C 750 165, 500 165, 375 98"
+                  />
+                  <path
+                    id="tx-progress-response"
+                    class="tx-svg-response-progress"
+                    d="M 875 98 C 750 165, 500 165, 375 98"
+                  />
+
+                  <text
+                    x="500"
+                    y="52"
+                    class="tx-svg-label mono"
+                    text-anchor="middle"
+                  >
+                    PAYMENT REQUEST PATH →
+                  </text>
+                  <text
+                    x="625"
+                    y="172"
+                    class="tx-svg-label mono"
+                    id="tx-svg-return-label"
+                    text-anchor="middle"
+                  >
+                    ← VERIFIED RESULT PATH
+                  </text>
+
+                  <!-- Animated Data Packet with Floating Tag -->
+                  <g
+                    id="tx-svg-packet"
+                    class="tx-svg-packet"
+                    transform="translate(125, 72)"
+                    filter="url(#txPacketGlow)"
+                  >
+                    <circle r="11" class="tx-packet-outer" />
+                    <circle r="5.5" class="tx-packet-core" />
+                    <g
+                      class="tx-packet-badge-group"
+                      transform="translate(0, -22)"
+                    >
+                      <rect
+                        x="-54"
+                        y="-12"
+                        width="108"
+                        height="20"
+                        rx="10"
+                        class="tx-packet-pill-bg"
+                      />
+                      <text
+                        x="0"
+                        y="2"
+                        text-anchor="middle"
+                        class="tx-packet-pill-text mono"
+                        id="tx-packet-pill-text"
+                      >
+                        RM 11.50
+                      </text>
+                    </g>
+                  </g>
+                </svg>
+
+                <!-- 4 Clear, Familiar Participants -->
+                <div
+                  class="tx-nodes-grid"
+                  role="group"
+                  aria-label="Transaction participants"
+                >
+                  <button
+                    type="button"
+                    class="tx-participant-node active"
+                    id="tx-node-0"
+                    onclick="selectTxStage(0)"
+                  >
+                    <div class="tx-node-top">
+                      <span class="tx-node-index mono">01</span>
+                      <span class="tx-node-state mono" id="tx-state-0"
+                        >ACTIVE</span
+                      >
+                    </div>
+                    <span class="tx-node-icon" aria-hidden="true">📱</span>
+                    <strong class="tx-node-title display"
+                      >You &amp; Your Device</strong
+                    >
+                    <span class="tx-node-role"
+                      >Starts purchase &amp; chooses method</span
+                    >
+                  </button>
+
+                  <button
+                    type="button"
+                    class="tx-participant-node"
+                    id="tx-node-1"
+                    onclick="selectTxStage(1)"
+                  >
+                    <div class="tx-node-top">
+                      <span class="tx-node-index mono">02</span>
+                      <span class="tx-node-state mono" id="tx-state-1"
+                        >WAITING</span
+                      >
+                    </div>
+                    <span class="tx-node-icon" aria-hidden="true">🏪</span>
+                    <strong class="tx-node-title display"
+                      >Merchant Checkout</strong
+                    >
+                    <span class="tx-node-role"
+                      >Kopi Corner Café order screen</span
+                    >
+                  </button>
+
+                  <button
+                    type="button"
+                    class="tx-participant-node"
+                    id="tx-node-2"
+                    onclick="selectTxStage(2)"
+                  >
+                    <div class="tx-node-top">
+                      <span class="tx-node-index mono">03</span>
+                      <span class="tx-node-state mono" id="tx-state-2"
+                        >WAITING</span
+                      >
+                    </div>
+                    <span class="tx-node-icon" aria-hidden="true">🛡️</span>
+                    <strong class="tx-node-title display"
+                      >Payment Service</strong
+                    >
+                    <span class="tx-node-role"
+                      >Encrypts &amp; routes the request</span
+                    >
+                  </button>
+
+                  <button
+                    type="button"
+                    class="tx-participant-node"
+                    id="tx-node-3"
+                    onclick="selectTxStage(3)"
+                  >
+                    <div class="tx-node-top">
+                      <span class="tx-node-index mono">04</span>
+                      <span class="tx-node-state mono" id="tx-state-3"
+                        >WAITING</span
+                      >
+                    </div>
+                    <span class="tx-node-icon" aria-hidden="true">🏦</span>
+                    <strong class="tx-node-title display"
+                      >Bank / Wallet Provider</strong
+                    >
+                    <span class="tx-node-role"
+                      >Checks balance &amp; approves</span
+                    >
+                  </button>
+                </div>
+
+                <!-- Hidden compatibility hooks for self-tests -->
+                <div hidden aria-hidden="true">
+                  <div id="tx-node-4"></div>
+                  <span id="tx-state-4"></span>
+                  <div id="node-customer" class="flow-node"></div>
+                  <div id="arrow-1" class="flow-arrow"></div>
+                  <div id="node-system" class="flow-node"></div>
+                  <div id="arrow-2" class="flow-arrow"></div>
+                  <div id="node-merchant" class="flow-node"></div>
+                  <span id="tx-direction-tag"></span>
+                </div>
+              </div>
+
+              <!-- Synchronized Stage Explanation + Live Visual Scene Preview -->
+              <div class="tx-stage-detail-grid">
+                <!-- Left Card: Concise Human-Readable Explanation -->
+                <div
+                  class="step-explanation panel"
+                  id="tx-explanation-card"
+                  aria-live="polite"
+                >
+                  <div class="tx-card-top-row">
+                    <span class="step-number mono" id="tx-stage-eyebrow"
+                      >STEP <span id="step-num">1</span> OF 6</span
+                    >
+                    <span
+                      class="tx-outcome-pill mono"
+                      id="tx-active-outcome-pill"
+                      >OUTCOME: SUCCESSFUL</span
+                    >
+                  </div>
+                  <h3 class="step-title display" id="step-title">
+                    You start a purchase
+                  </h3>
+                  <p class="step-description" id="step-description">
+                    You pick your coffee (RM 11.50) at Kopi Corner Café and head
+                    to checkout. Before paying, you check that the shop name and
+                    total match your order.
+                  </p>
+                  <div class="tx-tech-note mono" id="tx-tech-note">
+                    KEY HABIT: Always check the merchant name and RM amount
+                    before you pay.
+                  </div>
+                </div>
+
+                <!-- Right Card: Animated Visual Scene Snapshot + Outcome State -->
+                <div
+                  class="tx-outcome-card panel"
+                  id="tx-outcome-card"
+                  data-status="successful"
+                >
+                  <div
+                    class="tx-scene-preview"
+                    id="tx-scene-preview"
+                    aria-hidden="true"
+                  >
+                    <div class="tx-preview-top mono">
+                      <span id="tx-preview-chip">CHECKOUT SCREEN</span>
+                      <span id="tx-preview-amount">RM 11.50</span>
+                    </div>
+                    <div class="tx-preview-graphic" id="tx-preview-graphic">
+                      <div class="tx-preview-icon" id="tx-preview-icon">☕</div>
+                      <div class="tx-preview-text">
+                        <strong id="tx-preview-headline"
+                          >Kopi Corner Café</strong
+                        >
+                        <span id="tx-preview-sub"
+                          >1 × Coffee · Ready to pay</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tx-outcome-summary-box">
+                    <div class="tx-outcome-status-row">
+                      <span class="tx-outcome-badge mono" id="tx-outcome-badge"
+                        >✓ APPROVED OUTCOME</span
+                      >
+                    </div>
+                    <h4
+                      class="tx-outcome-heading display"
+                      id="tx-outcome-heading"
+                    >
+                      Successful payment
+                    </h4>
+                    <p class="tx-outcome-copy" id="tx-outcome-copy">
+                      When approved, the confirmation travels back to the
+                      merchant so they can mark your order as paid.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Easy Step-by-Step Controls -->
+              <div class="explainer-controls">
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  id="prev-btn"
+                  onclick="prevStep()"
+                  disabled
+                >
+                  ← Previous
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="next-btn"
+                  onclick="nextStep()"
+                >
+                  Next step →
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  id="tx-pause-btn"
+                  onclick="toggleTxAutoplay()"
+                >
+                  ▶ Auto-play
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  onclick="replayExplainer()"
+                >
+                  ↻ Replay
+                </button>
+              </div>
+            </div>
+
+            <!-- Optional FAQ / Deeper Notes (Collapsed by Default for Simplicity) -->
+            <div class="tx-behind-scenes">
+              <div class="tx-behind-header">
+                <div>
+                  <p class="eyebrow mono">
+                    OPTIONAL DETAILS · PLAIN LANGUAGE FAQ
+                  </p>
+                  <h3 class="tx-sub-heading display">
+                    Common questions about online payments
+                  </h3>
+                </div>
+                <p class="tx-behind-sub">
+                  Tap any question below if you want a closer look at how
+                  different payments behave.
+                </p>
+              </div>
+
+              <div
+                class="tx-disclosure-list"
+                role="region"
+                aria-label="Optional payment questions"
+              >
+                <article class="tx-disclosure-item panel">
+                  <button
+                    type="button"
+                    class="tx-disclosure-trigger"
+                    onclick="toggleTxDisclosure(this)"
+                    aria-expanded="false"
+                  >
+                    <span class="tx-disc-code mono">01</span>
+                    <span class="tx-disc-title display"
+                      >Does clicking “Pay” mean the shop has my money
+                      immediately?</span
+                    >
+                    <span class="tx-disc-summary"
+                      >Why a payment is a multi-step check, not a single
+                      click.</span
+                    >
+                    <span class="tx-disc-chevron mono" aria-hidden="true"
+                      >+</span
+                    >
+                  </button>
+                  <div class="tx-disclosure-body" hidden>
+                    <p>
+                      <strong>Not immediately.</strong> Tapping “Pay” or
+                      “Confirm” only sends a payment request. Your bank or
+                      wallet provider still has to check your balance and
+                      security details, and the result has to travel back to the
+                      merchant before the order is confirmed.
+                    </p>
+                    <p class="tx-disc-tech mono">
+                      NOTE: Even after your payment is approved, the actual
+                      bank-to-bank settlement behind the scenes often happens
+                      later in batches.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="tx-disclosure-item panel">
+                  <button
+                    type="button"
+                    class="tx-disclosure-trigger"
+                    onclick="toggleTxDisclosure(this)"
+                    aria-expanded="false"
+                  >
+                    <span class="tx-disc-code mono">02</span>
+                    <span class="tx-disc-title display"
+                      >Why shouldn't merchants or buyers trust a screenshot as
+                      proof?</span
+                    >
+                    <span class="tx-disc-summary"
+                      >Why verified app and checkout updates matter.</span
+                    >
+                    <span class="tx-disc-chevron mono" aria-hidden="true"
+                      >+</span
+                    >
+                  </button>
+                  <div class="tx-disclosure-body" hidden>
+                    <p>
+                      <strong>Screenshots can be edited in seconds.</strong> A
+                      real transaction updates inside the merchant’s payment
+                      system and inside your own official wallet or banking app
+                      transaction history.
+                    </p>
+                    <p class="tx-disc-tech mono">
+                      SAFETY RULE: Always check your own app’s live status
+                      rather than relying on a picture someone shows you.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="tx-disclosure-item panel">
+                  <button
+                    type="button"
+                    class="tx-disclosure-trigger"
+                    onclick="toggleTxDisclosure(this)"
+                    aria-expanded="false"
+                  >
+                    <span class="tx-disc-code mono">03</span>
+                    <span class="tx-disc-title display"
+                      >What should I do if a payment shows “Pending”?</span
+                    >
+                    <span class="tx-disc-summary"
+                      >How to avoid paying twice when networks are slow.</span
+                    >
+                    <span class="tx-disc-chevron mono" aria-hidden="true"
+                      >+</span
+                    >
+                  </button>
+                  <div class="tx-disclosure-body" hidden>
+                    <p>
+                      <strong>Pause before trying again.</strong> A pending
+                      state means the final result hasn't arrived yet—often due
+                      to a slow mobile connection. Check your official wallet or
+                      bank history first so you don't accidentally pay twice.
+                    </p>
+                    <p class="tx-disc-tech mono">
+                      VARIATION NOTE: Different payment methods (QR wallets,
+                      cards, bank transfers) may use different intermediaries,
+                      but all rely on a confirmed status return.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Closing Takeaway Card -->
+            <div class="tx-takeaway-card panel">
+              <p class="eyebrow mono">KEY TAKEAWAY</p>
+              <h3 class="tx-takeaway-title display">
+                “A payment is a journey—not a single click.”
+              </h3>
+              <ul class="tx-takeaway-list">
+                <li>
+                  <span class="mono blue-text">01</span> Check the shop name and
+                  total before you start.
+                </li>
+                <li>
+                  <span class="mono blue-text">02</span> Your payment service
+                  and bank verify the request behind the scenes.
+                </li>
+                <li>
+                  <span class="mono blue-text">03</span> Wait for a clear
+                  Approved, Declined, or Pending status.
+                </li>
+                <li>
+                  <span class="mono blue-text">04</span> Trust your official app
+                  status—never a screenshot.
+                </li>
+              </ul>
+              <div class="tx-takeaway-actions">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="replayExplainer()"
+                >
+                  ↻ Replay transaction journey
+                </button>
+                <button
+                  type="button"
+                  class="return-btn mono"
+                  id="tx-return-result-btn"
+                  onclick="returnToResult()"
+                >
+                  ← BACK TO PAYMENT RESULT
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 3: FEATURE 2 — HOW TO PREVENT ANY SCAMS (ENTRY LAUNCHPAD) ============ -->
+      <section id="scam-sim" class="section section-scam">
+        <div class="scam-hero container" id="scam-top">
+          <div class="scam-copy">
+            <p class="eyebrow mono" id="scam-eyebrow">
+              INTERACTIVE SCAM SIMULATION / 02 · FULL-SCREEN EXPERIENCE
+            </p>
+            <h2 class="hero-title display" id="scam-headline">
+              <span class="line">ONE MESSAGE.</span>
+              <span class="line">ONE <span class="accent">WRONG</span></span>
+              <span class="line">MOVE.</span>
+            </h2>
+            <p class="hero-sub" id="scam-supporting">
+              A message claims your bank account is at risk and demands an
+              immediate transfer to a “secure account.” Step into our
+              full-screen smartphone simulation and test how you respond under
+              pressure.
+            </p>
+
+            <div class="hero-actions" id="scam-intro-actions">
+              <button
+                type="button"
+                class="btn btn-primary magnetic"
+                id="scam-start-btn"
+                onclick="launchImmersiveScamExperience()"
+              >
+                Start Prevent Scams <span class="btn-arrow">→</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-ghost"
+                onclick="scrollToInlineScamGuide()"
+              >
+                Read 6-step guide ↓
+              </button>
+            </div>
+            <p class="scam-context-tag mono">
+              FULL-SCREEN PHONE SIMULATION · NO REAL MONEY MOVES
+            </p>
+          </div>
+
+          <!-- Preview Phone Silhouette before Launching Full-Screen Mode -->
+          <div class="scam-device-col" aria-hidden="true">
+            <div class="float-chip chip-balance mono">
+              <span>SIMULATED WALLET</span>
+              <strong>RM 100.00</strong>
+            </div>
+            <div class="float-chip chip-amount mono">
+              <span>MODE</span>
+              <strong class="blue-text">CINEMA VIEW</strong>
+            </div>
+
+            <div
+              class="scam-preview-phone"
+              onclick="launchImmersiveScamExperience()"
+              title="Click to launch full-screen simulation"
+            >
+              <div class="phone-notch"></div>
+              <div class="scam-preview-screen">
+                <div class="scam-preview-clock display">09:41</div>
+                <div class="scam-preview-date mono">FRIDAY, OCTOBER 23</div>
+                <div class="scam-preview-notif">
+                  <div class="scam-preview-notif-top">
+                    <span class="scam-pulse-dot"></span>
+                    <strong>Bank Security Alert</strong>
+                    <span class="mono">now</span>
+                  </div>
+                  <p>
+                    Your account may be at risk. Transfer your funds to our
+                    secure account immediately...
+                  </p>
+                </div>
+                <div class="scam-preview-cta mono">
+                  CLICK “START PREVENT SCAMS” →
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inline 6-Step Guide Reference (Also accessible without entering cinema mode) -->
+        <div class="scam-guide-wrap container" id="scam-prevention-guide">
+          <div class="scam-guide-head">
+            <div>
+              <p class="eyebrow mono">STEP-BY-STEP PREVENTION GUIDE</p>
+              <h2 class="section-title display">
+                How to Prevent Any<br />Digital Scams.
+              </h2>
+            </div>
+            <div class="scam-guide-progress mono">06 ACTIONABLE STEPS</div>
+          </div>
+
+          <div class="scam-steps-list">
+            <article class="scam-step-row">
+              <div class="scam-step-num mono">STEP 01</div>
+              <h3 class="scam-step-title display">Pause Before Acting</h3>
+              <p class="scam-step-desc">
+                Scammers manufacture urgency to stop you from thinking clearly.
+                Never let threats or countdown deadlines force an immediate
+                financial decision.
+              </p>
+            </article>
+            <article class="scam-step-row">
+              <div class="scam-step-num mono">STEP 02</div>
+              <h3 class="scam-step-title display">
+                Reject “Secure Account” Transfers
+              </h3>
+              <p class="scam-step-desc">
+                Never transfer money to a supposed “secure account” solely
+                because an SMS or call tells you to. Legitimate banks do not ask
+                you to move money to protect it.
+              </p>
+            </article>
+            <article class="scam-step-row">
+              <div class="scam-step-num mono">STEP 03</div>
+              <h3 class="scam-step-title display">
+                Verify Independently via Official App
+              </h3>
+              <p class="scam-step-desc">
+                Open your official banking app or website independently. Never
+                tap links or payment instructions embedded inside a suspicious
+                message.
+              </p>
+            </article>
+            <article class="scam-step-row">
+              <div class="scam-step-num mono">STEP 04</div>
+              <h3 class="scam-step-title display">
+                Call Using an Official Number
+              </h3>
+              <p class="scam-step-desc">
+                Contact your bank using the trusted number on the back of your
+                bank card or verified official website—never a phone number
+                provided inside the suspicious SMS.
+              </p>
+            </article>
+            <article class="scam-step-row">
+              <div class="scam-step-num mono">STEP 05</div>
+              <h3 class="scam-step-title display">
+                Protect Passwords, PINs &amp; OTPs
+              </h3>
+              <p class="scam-step-desc">
+                Never share your password, PIN, or one-time verification code
+                (OTP) with anyone who contacts you unexpectedly.
+              </p>
+            </article>
+            <article class="scam-step-row">
+              <div class="scam-step-num mono">STEP 06</div>
+              <h3 class="scam-step-title display">
+                Report &amp; Secure Immediately
+              </h3>
+              <p class="scam-step-desc">
+                If money has already been transferred or sensitive details
+                shared, contact your bank immediately through an official
+                channel to freeze and report the incident.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 4: SAFETY FIELD GUIDE ============ -->
+      <section id="safety" class="section section-safety">
+        <div class="container">
+          <p class="eyebrow mono reveal">
+            FIELD GUIDE — SCAM &amp; ERROR PREVENTION
+          </p>
+          <h2 class="section-title display reveal">
+            Stay safe with<br />every scan.
+          </h2>
+          <p class="section-subtitle reveal">
+            Take shortcuts on the road, not with your safety — six habits that
+            protect every payment you make.
+          </p>
+          <div class="safety-grid">
+            <article class="safety-card reveal">
+              <div class="safety-num mono">01</div>
+              <h3 class="safety-title display">Verify the merchant</h3>
+              <p class="safety-description">
+                The name on screen must match the shop in front of you. If it
+                doesn't, stop.
+              </p>
+            </article>
+            <article class="safety-card reveal">
+              <div class="safety-num mono">02</div>
+              <h3 class="safety-title display">Compare the amount</h3>
+              <p class="safety-description">
+                Receipt says RM 11.50, screen says RM 115.00 — that difference
+                is the whole lesson.
+              </p>
+            </article>
+            <article class="safety-card reveal">
+              <div class="safety-num mono">03</div>
+              <h3 class="safety-title display">Don't rush</h3>
+              <p class="safety-description">
+                A wrong confirm is faster than a right one. Pause on any
+                unexpected amount.
+              </p>
+            </article>
+            <article class="safety-card reveal">
+              <div class="safety-num mono">04</div>
+              <h3 class="safety-title display">Screenshots aren't proof</h3>
+              <p class="safety-description">
+                Verify status inside your own wallet app. A picture can be
+                edited by anyone.
+              </p>
+            </article>
+            <article class="safety-card reveal">
+              <div class="safety-num mono">05</div>
+              <h3 class="safety-title display">Keep your receipt</h3>
+              <p class="safety-description">
+                Save it. If anything goes wrong, the receipt is your evidence.
+              </p>
+            </article>
+            <article class="safety-card reveal">
+              <div class="safety-num mono">06</div>
+              <h3 class="safety-title display">Know who to call</h3>
+              <p class="safety-description">
+                Merchant first. Then your payment provider for refunds and
+                disputes.
+              </p>
+            </article>
+          </div>
+        </div>
+        <footer class="footer container">
+          <p class="mono">
+            QRPay Lab — EDUCATIONAL SIMULATION. EVERY SCAN, PAYMENT AND RECEIPT
+            IS FICTIONAL; NOTHING REAL MOVES. FOR DEMO AND LEARNING USE ONLY.
+          </p>
+        </footer>
+      </section>
+    </div>
+    <!-- /#site-shell -->
+
+    <!-- ============================================================
+         FULL-SCREEN CINEMATIC IMMERSIVE OVERLAY FOR “HOW TO PREVENT ANY SCAMS”
+         Covers 100% of viewport. All scenario screens, choices, confirmations,
+         and outcomes live strictly inside the centered smartphone interface.
+         ============================================================ -->
+    <div
+      id="scam-immersive-overlay"
+      class="scam-cinema-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cinema-mode-label"
+      hidden
+    >
+      <!-- Subtle Ambient Backdrop -->
+      <div
+        class="scam-cinema-backdrop"
+        id="scam-cinema-backdrop"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Minimal Unobtrusive Top Bar (Simulation Badge + Replay + Exit) -->
+      <header class="scam-cinema-topbar">
+        <div class="scam-cinema-meta mono" id="cinema-mode-label">
+          <span class="scam-sim-dot" aria-hidden="true"></span>
+          <span class="cinema-meta-text">SIMULATION — NO REAL MONEY MOVES</span>
+        </div>
+        <div class="scam-cinema-controls">
+          <button
+            type="button"
+            class="scam-cinema-btn mono"
+            onclick="replayImmersiveScamScenario()"
+            aria-label="Replay scam scenario"
+          >
+            ↻ Replay
+          </button>
+          <button
+            type="button"
+            class="scam-cinema-btn scam-exit-btn mono"
+            id="scam-cinema-exit-btn"
+            onclick="exitImmersiveScamExperience()"
+            aria-label="Exit full-screen simulation (Escape)"
+          >
+            ✕ Exit <span class="esc-hint">[ESC]</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- STAGE A: CENTERED SMARTPHONE THEATER (Primary & Exclusive Visual Focus) -->
+      <div class="scam-cinema-stage" id="scam-cinema-phone-stage">
+        <div class="cinema-phone-chassis" id="cinema-phone-chassis">
+          <div class="cinema-phone-bezel">
+            <!-- Realistic Status Bar & Dynamic Island -->
+            <div class="cinema-statusbar mono">
+              <span class="cinema-time-mini">09:41</span>
+              <div
+                class="cinema-dynamic-island"
+                id="cinema-dynamic-island"
+                aria-hidden="true"
+              >
+                <span class="island-camera"></span>
+              </div>
+              <span class="cinema-status-icons">5G · 100%</span>
+            </div>
+
+            <!-- Phone Screen Viewport (All Scenes & Choices Live Strictly Inside Here) -->
+            <div class="cinema-screen-viewport" id="cinema-screen-viewport">
+              <!-- IN-PHONE SCREEN 1: LOCK SCREEN & NOTIFICATION (Scenes 1 & 2) -->
+              <div
+                class="cinema-app-screen active"
+                id="c-screen-lock"
+                role="region"
+                aria-label="Simulated Smartphone Lock Screen"
+              >
+                <div class="c-lock-header">
+                  <div class="c-lock-padlock mono" aria-hidden="true">
+                    🔒 SIMULATED DEVICE
+                  </div>
+                  <div class="c-lock-clock display">09:41</div>
+                  <div class="c-lock-date mono">FRIDAY, OCTOBER 23</div>
+                </div>
+
+                <!-- Incoming Fake Bank SMS Notification -->
+                <div class="c-notif-slot">
+                  <button
+                    type="button"
+                    class="c-sms-notif-card"
+                    id="c-sms-notif-btn"
+                    onclick="openImmersiveSms()"
+                    aria-label="Incoming SMS from Apex National Alerts: Your account may be at risk. Tap to open message."
+                  >
+                    <div class="c-notif-header">
+                      <span class="c-notif-app">
+                        <span class="c-notif-icon" aria-hidden="true">💬</span>
+                        <strong>MESSAGES · APEX NATIONAL ALERTS</strong>
+                      </span>
+                      <span class="c-notif-time mono">now</span>
+                    </div>
+                    <p class="c-notif-preview">
+                      URGENT: Your bank account is at risk. Transfer your money
+                      to our secure account immediately to prevent financial
+                      loss.
+                    </p>
+                    <div class="c-notif-action-hint mono">
+                      <span>TAP NOTIFICATION TO OPEN MESSAGE</span>
+                      <span aria-hidden="true">→</span>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="c-lock-bottom mono">
+                  <span>SIMULATED WALLET: RM 100.00</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE SCREEN 2: MESSAGES APP + HIGHLIGHTED SMS + IN-PHONE RESPONSE CHOICES (Scenes 3 & 4) -->
+              <div
+                class="cinema-app-screen"
+                id="c-screen-messages"
+                role="region"
+                aria-label="Simulated Messages Application"
+              >
+                <div class="c-app-navbar">
+                  <div class="c-sender-avatar" aria-hidden="true">!</div>
+                  <div class="c-sender-meta">
+                    <strong class="c-sender-name">Apex National Alerts</strong>
+                    <span class="c-sender-sub mono"
+                      >Unverified Shortcode · SMS</span
+                    >
+                  </div>
+                  <span class="c-sim-pill mono">SIMULATED</span>
+                </div>
+
+                <div class="c-messages-scroll" id="c-messages-scroll">
+                  <div class="c-thread-timestamp mono">TODAY · 09:41 AM</div>
+
+                  <!-- Suspicious Incoming SMS Bubble -->
+                  <div class="c-sms-incoming-bubble" id="c-sms-bubble">
+                    URGENT: Your bank
+                    <span class="c-flag-word" data-flag="0"
+                      >account is at risk</span
+                    >. Transfer your money (RM 100.00) to our
+                    <span class="c-flag-word" data-flag="1"
+                      >secure account</span
+                    >
+                    <span class="c-flag-word" data-flag="2">immediately</span>
+                    to prevent financial loss.<br />
+                    <span class="c-fake-ref mono">Ref: SEC-ACCT-8829</span>
+                  </div>
+
+                  <!-- Progressive Red-Flag Annotation Chip inside Phone -->
+                  <div
+                    class="c-inphone-annotation mono"
+                    id="c-inphone-annotation"
+                    hidden
+                  >
+                    <div class="c-annot-title">
+                      ⚠ SUSPICIOUS LANGUAGE IDENTIFIED
+                    </div>
+                    <ul class="c-annot-list">
+                      <li>
+                        <span>“account is at risk”</span> — Manufactured panic
+                      </li>
+                      <li>
+                        <span>“secure account”</span> — Fraudster destination
+                      </li>
+                      <li><span>“immediately”</span> — Rush tactic</li>
+                    </ul>
+                  </div>
+
+                  <!-- Prompt to open in-phone response tray -->
+                  <div
+                    class="c-read-confirm-wrap"
+                    id="c-read-confirm-wrap"
+                    hidden
+                  >
+                    <p class="c-inphone-prompt">
+                      How do you respond to this message?
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-primary c-full-btn"
+                      id="c-open-choices-btn"
+                      onclick="revealInPhoneChoices()"
+                    >
+                      Choose how to respond <span class="btn-arrow">↓</span>
+                    </button>
+                  </div>
+
+                  <!-- SCENE 4: ALL THREE RESPONSE CHOICES INSIDE THE PHONE -->
+                  <div
+                    class="c-inphone-choices"
+                    id="c-inphone-choices"
+                    role="group"
+                    aria-label="Choose your response inside the phone"
+                    hidden
+                  >
+                    <div class="c-choices-header mono">SELECT YOUR ACTION</div>
+
+                    <button
+                      type="button"
+                      class="c-choice-card c-choice-risk"
+                      onclick="chooseImmersiveBranch('transfer')"
+                    >
+                      <div class="c-choice-top">
+                        <strong class="c-choice-title display"
+                          >1. Transfer the money</strong
+                        >
+                        <span class="c-choice-badge risk mono">UNVERIFIED</span>
+                      </div>
+                      <span class="c-choice-desc"
+                        >Follow the SMS instructions and transfer your RM 100.00
+                        to the supposed “secure account.”</span
+                      >
+                    </button>
+
+                    <button
+                      type="button"
+                      class="c-choice-card"
+                      onclick="chooseImmersiveBranch('app')"
+                    >
+                      <div class="c-choice-top">
+                        <strong class="c-choice-title display"
+                          >2. Check the official banking app</strong
+                        >
+                        <span class="c-choice-badge mono">APP CHECK</span>
+                      </div>
+                      <span class="c-choice-desc"
+                        >Independently open your bank's official app and look
+                        for a matching security alert.</span
+                      >
+                    </button>
+
+                    <button
+                      type="button"
+                      class="c-choice-card"
+                      onclick="chooseImmersiveBranch('contact')"
+                    >
+                      <div class="c-choice-top">
+                        <strong class="c-choice-title display"
+                          >3. Contact the bank via official number</strong
+                        >
+                        <span class="c-choice-badge mono">DIRECT CALL</span>
+                      </div>
+                      <span class="c-choice-desc"
+                        >Verify the message using the trusted number on your
+                        bank card, independent of the SMS.</span
+                      >
+                    </button>
+                  </div>
+                </div>
+
+                <div class="c-app-footer mono">
+                  <span>SIMULATION — NO REAL MONEY MOVES</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE SCREEN 3: BRANCH WORKFLOW SCREEN (Transfer Confirmation / Official App / Official Call) -->
+              <div
+                class="cinema-app-screen"
+                id="c-screen-workflow"
+                role="region"
+                aria-label="Simulated Application Workflow"
+              >
+                <div class="c-app-navbar" id="c-wf-navbar">
+                  <button
+                    type="button"
+                    class="c-back-link mono"
+                    id="c-wf-back-btn"
+                    onclick="backToInPhoneChoices()"
+                    aria-label="Back to response choices"
+                  >
+                    ← Back
+                  </button>
+                  <div class="c-sender-meta">
+                    <strong class="c-sender-name" id="c-wf-app-title"
+                      >Simulated Transfer</strong
+                    >
+                    <span class="c-sender-sub mono" id="c-wf-app-sub"
+                      >FICTIONAL SANDBOX</span
+                    >
+                  </div>
+                  <span class="c-sim-pill mono">SIMULATED</span>
+                </div>
+
+                <div class="c-wf-body" id="c-wf-body">
+                  <!-- Populated dynamically per branch -->
+                </div>
+
+                <div class="c-app-footer mono">
+                  <span>SIMULATION — NO REAL MONEY MOVES</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE SCREEN 4: CONSISTENT IN-PHONE RESULT SCREEN (Section 7) -->
+              <div
+                class="cinema-app-screen"
+                id="c-screen-result"
+                role="region"
+                aria-live="polite"
+                aria-label="Scenario Outcome Summary"
+              >
+                <div class="c-app-navbar">
+                  <div class="c-sender-meta">
+                    <strong class="c-sender-name">Scenario Outcome</strong>
+                    <span class="c-sender-sub mono"
+                      >SIMULATION — NO REAL MONEY</span
+                    >
+                  </div>
+                  <span class="c-sim-pill mono" id="c-res-pill">OUTCOME</span>
+                </div>
+
+                <div class="c-result-scroll">
+                  <div class="c-res-status-banner" id="c-res-banner">
+                    <div
+                      class="c-res-icon mono"
+                      id="c-res-icon"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </div>
+                    <div>
+                      <div class="c-res-tag mono" id="c-res-tag">
+                        VERIFIED OUTCOME
+                      </div>
+                      <h3 class="c-res-title display" id="c-res-title">
+                        Outcome Title
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p class="c-res-explanation" id="c-res-explanation"></p>
+
+                  <div class="c-res-wallet-box mono">
+                    <span>SIMULATED WALLET BALANCE</span>
+                    <strong id="c-res-wallet">RM 100.00</strong>
+                  </div>
+
+                  <div class="c-res-lessons-card">
+                    <div class="panel-label mono">KEY TAKEAWAYS</div>
+                    <ul class="c-res-lessons-list" id="c-res-lessons"></ul>
+                  </div>
+
+                  <div class="c-res-actions">
+                    <button
+                      type="button"
+                      class="btn btn-primary c-full-btn"
+                      onclick="openImmersiveSafetyGuide()"
+                    >
+                      Review Safety Guide <span class="btn-arrow">→</span>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-ghost c-full-btn"
+                      onclick="replayImmersiveScamScenario()"
+                    >
+                      ↻ Replay Scenario
+                    </button>
+                  </div>
+                </div>
+
+                <div class="c-app-footer mono">
+                  <span>URGENCY IS A REASON TO VERIFY</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /.cinema-screen-viewport -->
+          </div>
+          <!-- /.cinema-phone-bezel -->
+        </div>
+        <!-- /.cinema-phone-chassis -->
+      </div>
+      <!-- /#scam-cinema-phone-stage -->
+
+      <!-- STAGE B: FULL-SCREEN EDITORIAL LEARNING SCENE (Section 8 Transition from Phone) -->
+      <div class="scam-cinema-guide-scene" id="scam-cinema-guide-scene" hidden>
+        <div class="cinema-guide-container">
+          <div class="cinema-guide-header">
+            <p class="eyebrow mono">
+              SCAM-PREVENTION PROTOCOL · 06 ESSENTIAL HABITS
+            </p>
+            <h2 class="cinema-guide-title display">
+              Urgency is a reason to verify,<br />not a reason to transfer.
+            </h2>
+            <p class="cinema-guide-sub">
+              Follow these six practical verification habits whenever you
+              receive an unexpected financial alert, SMS, or call.
+            </p>
+          </div>
+
+          <div class="cinema-guide-grid">
+            <article class="cinema-guide-card panel">
+              <span class="cinema-step-num mono">01 · PAUSE</span>
+              <h3 class="cinema-step-heading display">
+                Pause before acting on urgent messages
+              </h3>
+              <p>
+                Scammers rely on panic and countdown threats so you act before
+                thinking. Take a breath and step back from any urgent transfer
+                demand.
+              </p>
+            </article>
+
+            <article class="cinema-guide-card panel">
+              <span class="cinema-step-num mono"
+                >02 · REJECT “SECURE ACCOUNTS”</span
+              >
+              <h3 class="cinema-step-heading display">
+                Never transfer to a “secure account”
+              </h3>
+              <p>
+                Legitimate banks never ask you to transfer money into a separate
+                “safe” or “secure” account via SMS to protect your balance.
+              </p>
+            </article>
+
+            <article class="cinema-guide-card panel">
+              <span class="cinema-step-num mono"
+                >03 · INDEPENDENT APP CHECK</span
+              >
+              <h3 class="cinema-step-heading display">
+                Verify through the official banking app
+              </h3>
+              <p>
+                Open your official banking app or website independently. Never
+                tap links or payment instructions inside a suspicious text
+                message.
+              </p>
+            </article>
+
+            <article class="cinema-guide-card panel">
+              <span class="cinema-step-num mono">04 · TRUSTED NUMBER</span>
+              <h3 class="cinema-step-heading display">
+                Call using an independently verified number
+              </h3>
+              <p>
+                Use the official number printed on the back of your bank card or
+                official website—never call a number provided inside the
+                suspicious SMS.
+              </p>
+            </article>
+
+            <article class="cinema-guide-card panel">
+              <span class="cinema-step-num mono">05 · GUARD CREDENTIALS</span>
+              <h3 class="cinema-step-heading display">
+                Never share passwords, PINs, or OTPs
+              </h3>
+              <p>
+                No genuine bank representative will ever ask you to read out a
+                one-time verification code (OTP), PIN, or password over a call
+                or message.
+              </p>
+            </article>
+
+            <article class="cinema-guide-card panel">
+              <span class="cinema-step-num mono"
+                >06 · ACT FAST IF COMPROMISED</span
+              >
+              <h3 class="cinema-step-heading display">
+                Report and secure your account immediately
+              </h3>
+              <p>
+                If money was transferred or credentials shared, contact your
+                bank immediately via an official channel to freeze your account
+                and file a report.
+              </p>
+            </article>
+          </div>
+
+          <div class="cinema-guide-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="replayImmersiveScamScenario()"
+            >
+              ↻ Replay Phone Simulation
+            </button>
+            <button
+              type="button"
+              class="btn btn-ghost"
+              onclick="exitImmersiveScamExperience()"
+            >
+              Exit to QRPay Lab Website
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#scam-immersive-overlay -->
+
+    <!-- ============================================================
+         FULL-SCREEN IMMERSIVE SMARTPHONE MODE FOR THE QR PAYMENT CHALLENGE
+         Mirrors the site flow intro → scan → verify → confirm → processing → result
+         inside a single centered phone. Educational simulation only.
+         ============================================================ -->
+    <div
+      id="pay-immersive-overlay"
+      class="scam-cinema-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pay-mode-label"
+      hidden
+    >
+      <div class="scam-cinema-backdrop" aria-hidden="true"></div>
+
+      <header class="scam-cinema-topbar">
+        <div class="scam-cinema-meta mono" id="pay-mode-label">
+          <span class="scam-sim-dot" aria-hidden="true"></span>
+          <span class="cinema-meta-text"
+            >PAYMENT SIMULATOR — SIMULATED PHONE · NO REAL MONEY</span
+          >
+        </div>
+        <div class="scam-cinema-controls">
+          <button
+            type="button"
+            class="scam-cinema-btn mono"
+            onclick="replayImmersivePayScenario()"
+            aria-label="Replay payment simulation"
+          >
+            ↻ Replay
+          </button>
+          <button
+            type="button"
+            class="scam-cinema-btn scam-exit-btn mono"
+            id="pay-cinema-exit-btn"
+            onclick="exitImmersivePayExperience()"
+            aria-label="Exit full-screen payment simulation (Escape)"
+          >
+            ✕ Exit <span class="esc-hint">[ESC]</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="scam-cinema-stage">
+        <div class="cinema-phone-chassis" id="pay-cinema-chassis">
+          <div class="cinema-phone-bezel">
+            <div class="cinema-statusbar mono">
+              <span class="cinema-time-mini">09:41</span>
+              <div class="cinema-dynamic-island" aria-hidden="true">
+                <span class="island-camera"></span>
+              </div>
+              <span class="cinema-status-icons">5G · 100%</span>
+            </div>
+
+            <div class="cinema-screen-viewport">
+              <!-- IN-PHONE 1: CAFÉ / READY -->
+              <div
+                class="cinema-app-screen pay-screen active"
+                id="p-screen-intro"
+                role="region"
+                aria-label="Simulated café wallet app"
+              >
+                <div class="pay-reveal pay-padlock mono" aria-hidden="true">
+                  🔒 SIMULATED WALLET APP
+                </div>
+                <div class="pay-reveal pay-merchant display">
+                  Kopi Corner Café
+                </div>
+                <div class="pay-reveal pay-receipt panel">
+                  <div class="panel-label mono">
+                    ORDER RECEIPT (PURCHASE AMOUNT)
+                  </div>
+                  <div class="pay-receipt-row">
+                    <span>Coffee × 1</span
+                    ><span class="mono blue-text">RM 11.50</span>
+                  </div>
+                </div>
+                <div class="pay-reveal pay-balance-box mono">
+                  <span>SIMULATED WALLET BALANCE</span>
+                  <strong id="pay-intro-balance">RM 100.00</strong>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary pay-full-btn"
+                  id="pay-scan-btn"
+                  onclick="payStartScan()"
+                >
+                  Scan QR code <span class="btn-arrow">→</span>
+                </button>
+                <div class="c-app-footer mono">
+                  <span>SIMULATION — NO REAL MONEY MOVES</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE 2: QR SCANNING -->
+              <div
+                class="cinema-app-screen pay-screen"
+                id="p-screen-scan"
+                role="region"
+                aria-label="Scanning QR code"
+              >
+                <div class="pay-reveal pay-scanner-area">
+                  <div
+                    class="scanner-frame"
+                    role="img"
+                    aria-label="QR code being scanned"
+                  >
+                    <div class="qr-mock"></div>
+                    <div
+                      class="pay-scanline"
+                      id="pay-scanline"
+                      aria-hidden="true"
+                    ></div>
+                    <div class="qr-corner tl" aria-hidden="true"></div>
+                    <div class="qr-corner tr" aria-hidden="true"></div>
+                    <div class="qr-corner bl" aria-hidden="true"></div>
+                    <div class="qr-corner br" aria-hidden="true"></div>
+                  </div>
+                  <p
+                    class="pay-scan-status mono"
+                    id="pay-scan-status"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    SCANNING QR…
+                  </p>
+                </div>
+                <div class="c-app-footer mono">
+                  <span>SIMULATED CAMERA — NOTHING REAL IS SCANNED</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE 3: AMOUNT REVIEW / VERIFY -->
+              <div
+                class="cinema-app-screen pay-screen"
+                id="p-screen-review"
+                role="region"
+                aria-label="Verify the payment amount"
+              >
+                <div class="pay-navbar pay-reveal">
+                  <button
+                    type="button"
+                    class="pay-back mono"
+                    onclick="payBackToIntro()"
+                    aria-label="Back to café"
+                  >
+                    ← Café
+                  </button>
+                  <span class="pay-navbar-title display">Verify payment</span>
+                  <span class="c-sim-pill mono">SIMULATED</span>
+                </div>
+                <p class="pay-reveal pay-merchant-sm display">
+                  Kopi Corner Café
+                </p>
+                <div class="pay-reveal pay-amount-wrap" id="pay-amount-wrap">
+                  <div class="panel-label mono" id="pay-amount-label">
+                    QR-DISPLAYED PAYMENT AMOUNT
+                  </div>
+                  <div class="pay-amount mono" id="pay-review-amount">
+                    RM 115.00
+                  </div>
+                  <div
+                    class="pay-amount-flag mono"
+                    id="pay-review-flag"
+                    role="status"
+                  >
+                    SCREEN SAYS RM 115.00 — RECEIPT SAYS RM 11.50
+                  </div>
+                  <div class="pay-input-row">
+                    <label class="panel-label mono" for="pay-inline-input"
+                      >VERIFY OR EDIT AMOUNT (RM)</label
+                    >
+                    <div class="pay-input-line">
+                      <span class="pay-cur mono" aria-hidden="true">RM</span>
+                      <input
+                        type="text"
+                        id="pay-inline-input"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        spellcheck="false"
+                        value="115.00"
+                        class="pay-amount-input mono"
+                        aria-describedby="pay-inline-error"
+                      />
+                      <button
+                        type="button"
+                        class="btn-match-receipt mono"
+                        id="pay-receipt-btn"
+                        onclick="payUseReceiptAmount()"
+                        title="Set to RM 11.50"
+                      >
+                        Use RM&nbsp;11.50
+                      </button>
+                    </div>
+                    <div
+                      class="field-error mono"
+                      id="pay-inline-error"
+                      role="alert"
+                      hidden
+                    ></div>
+                  </div>
+                </div>
+                <div class="pay-reveal pay-balance-box mono">
+                  <span>Simulated wallet balance</span>
+                  <strong id="pay-review-wallet">RM 100.00</strong>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary pay-full-btn"
+                  id="pay-proceed-btn"
+                  onclick="payProceedToConfirmation()"
+                >
+                  Proceed <span class="btn-arrow">→</span>
+                </button>
+                <div class="c-app-footer mono">
+                  <span>ALWAYS COMPARE THE SCREEN AGAINST YOUR RECEIPT</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE 4: CONFIRMATION -->
+              <div
+                class="cinema-app-screen pay-screen"
+                id="p-screen-confirm"
+                role="region"
+                aria-label="Confirm payment"
+              >
+                <div class="pay-navbar pay-reveal">
+                  <button
+                    type="button"
+                    class="pay-back mono"
+                    onclick="payBackToReview()"
+                    aria-label="Back to amount review"
+                  >
+                    ← Verify
+                  </button>
+                  <span class="pay-navbar-title display">Final check</span>
+                  <span class="c-sim-pill mono">SIMULATED</span>
+                </div>
+                <div class="pay-reveal pay-confirm-box panel">
+                  <div class="panel-label mono">
+                    FINAL CHECK · KOPI CORNER CAFÉ
+                  </div>
+                  <div class="pay-confirm-title display">
+                    You are about to pay
+                  </div>
+                  <div class="pay-confirm-amount mono" id="pay-confirm-amount">
+                    RM 115.00
+                  </div>
+                  <div
+                    class="pay-confirm-note mono"
+                    id="pay-confirm-note"
+                    role="status"
+                  ></div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary pay-full-btn"
+                  id="pay-confirm-pay-btn"
+                  onclick="payConfirmPayment()"
+                >
+                  Confirm &amp; pay
+                </button>
+                <div class="c-app-footer mono">
+                  <span>SIMULATED TRANSACTION — NOTHING REAL MOVES</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE 5: PROCESSING -->
+              <div
+                class="cinema-app-screen pay-screen"
+                id="p-screen-processing"
+                role="region"
+                aria-label="Processing simulated payment"
+                aria-live="polite"
+              >
+                <div class="pay-reveal pay-processing-body panel">
+                  <div class="spinner" aria-hidden="true"></div>
+                  <div class="pay-processing-text mono">
+                    PROCESSING SIMULATED PAYMENT…
+                  </div>
+                  <div class="pay-processing-ref mono" id="pay-processing-ref">
+                    TXN · KOPI CORNER CAFÉ
+                  </div>
+                </div>
+                <div class="c-app-footer mono">
+                  <span>DO NOT DOUBLE-PAY — SIMULATION</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- IN-PHONE 6: RESULT -->
+              <div
+                class="cinema-app-screen pay-screen"
+                id="p-screen-result"
+                role="region"
+                aria-label="Simulation outcome"
+                aria-live="polite"
+              >
+                <div class="pay-result-scroll">
+                  <div class="pay-res-banner" id="pay-res-banner">
+                    <div
+                      class="pay-result-icon mono pay-reveal"
+                      id="pay-result-icon"
+                      role="img"
+                      aria-label="Result status"
+                    >
+                      ✓
+                    </div>
+                    <h3
+                      class="display pay-result-title pay-reveal"
+                      id="pay-result-title"
+                    >
+                      Payment successful
+                    </h3>
+                  </div>
+                  <p
+                    class="pay-result-message pay-reveal"
+                    id="pay-result-message"
+                    role="status"
+                  ></p>
+                  <div class="pay-result-rows panel pay-reveal">
+                    <div class="pay-row">
+                      <span>Confirmed amount paid</span
+                      ><strong class="mono" id="pay-result-paid"
+                        >RM 11.50</strong
+                      >
+                    </div>
+                    <div class="pay-row">
+                      <span>Remaining simulated balance</span
+                      ><strong class="mono" id="pay-result-balance"
+                        >RM 88.50</strong
+                      >
+                    </div>
+                    <div class="pay-row" id="pay-result-overset" hidden>
+                      <span id="pay-result-over-label"
+                        >Overpayment vs. receipt</span
+                      ><strong class="mono" id="pay-result-over-value"
+                        >RM 0.00</strong
+                      >
+                    </div>
+                  </div>
+                  <div class="pay-result-actions pay-reveal">
+                    <button
+                      type="button"
+                      class="btn btn-primary c-full-btn"
+                      onclick="replayImmersivePayScenario()"
+                    >
+                      ↻ Replay simulation
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-ghost c-full-btn"
+                      onclick="exitImmersivePayExperience()"
+                    >
+                      Exit to website
+                    </button>
+                  </div>
+                </div>
+                <div class="c-app-footer mono">
+                  <span>SIMULATION — NO REAL MONEY MOVED</span>
+                  <div class="c-home-indicator" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+            <!-- /.cinema-screen-viewport -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#pay-immersive-overlay -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="app.js?v=31"></script>
+  </body>
+</html>
